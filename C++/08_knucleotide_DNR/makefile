@@ -4,7 +4,7 @@ COMPILER = sudo /workspaces/01-wasm-c/emsdk/upstream/emscripten/emcc
 FILE = knucleotide.gpp-2.cpp
 BINARY = knucleotide.gpp-2.o
 OUTPUT = knucleotide.gpp-2.html
-BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge 
+BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge --stdlib=libstdc++
 SIMD_FLAGS = 
 COMPILER_FLAGS = -s USE_PTHREADS=1 -std=gnu++17
 LINKER_FLAGS = -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8 
