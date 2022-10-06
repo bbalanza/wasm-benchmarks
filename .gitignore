@@ -2,3 +2,5 @@ emsdk
 *target
 *pkg
 *Cargo.lock
+.vscode
+.devcontainer
