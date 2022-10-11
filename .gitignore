@@ -4,3 +4,4 @@ emsdk
 *Cargo.lock
 .vscode
 .devcontainer
+node_modules
