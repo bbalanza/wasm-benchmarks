@@ -1,0 +1,4 @@
+device,subject,browser,batterystats_Joule_calculated
+j7duo2,https-greenlab-myddns-me-c-03_spectralnorm_dnr-spectralnorm-gcc-5-gcc_run-html,chrome,50.16038399999999
+j7duo2,https-greenlab-myddns-me-c-01_fannkuchredux-fannkuchredux-gcc-6-gcc_run-html,chrome,61.629984000000015
+j7duo2,https-greenlab-myddns-me-c-02_nbody-nbody-gcc-8-gcc_run-html,chrome,53.677728
