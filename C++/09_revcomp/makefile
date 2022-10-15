@@ -6,8 +6,8 @@ BINARY = revcomp.gpp-2.o
 OUTPUT = revcomp.gpp-2.html
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge 
 SIMD_FLAGS = -msimd128 -mavx 
-COMPILER_FLAGS = -std=c++11 -sALLOW_MEMORY_GROWTH
-LINKER_FLAGS = -std=c++11 --preload-file ../assets -sALLOW_MEMORY_GROWTH
+COMPILER_FLAGS = -std=c++11
+LINKER_FLAGS = -std=c++11 --preload-file ../../assets -sALLOW_MEMORY_GROWTH
 PTHREAD_FLAGS = 
 LIBRARY_FLAGS = 
 

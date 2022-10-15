@@ -1,22 +1,23 @@
-.PHONY: all build clean
+.PHONY: all build link clean
 
-COMPILER = sudo ../emsdk/upstream/emscripten/emcc
-FILE = knucleotide.c 
-OUTPUT = knucleotide.gcc_run.html
-BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge
-BASE_SIMD_FLAGS =
-SIMD_FLAGS = 
-PTHREAD_FLAGS = 
-EXTRA_FLAGS =  
-LINKER_FLAG = 
+COMPILER = sudo /workspaces/01-wasm/emsdk/upstream/emscripten/emcc
+FILE = revcomp.gcc-7.c
+BINARY = revcomp.gcc-7.o
+OUTPUT = revcomp.gcc-7.html
+BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge 
+SIMD_FLAGS = -msimd128 -mavx 
+COMPILER_FLAGS =
+LINKER_FLAGS = --preload-file ../../assets -sALLOW_MEMORY_GROWTH
+PTHREAD_FLAGS = -pthread -lpthread -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8
+LIBRARY_FLAGS = 
 
-EXPORTED_FUNCTIONS = _main
-EXPORTED_RUNTIME_METHODS = ccall,cwrap
-
-all: build clean
+all: build link clean
 build: ${FILE}
-	@echo "Building..."
-	@${COMPILER} ${BASE_FLAGS} ${EXTRA_FLAGS} ${SIMD_FLAGS} -s EXPORTED_FUNCTIONS=${EXPORTED_FUNCTIONS} -s EXPORTED_RUNTIME_METHODS=${EXPORTED_RUNTIME_METHODS}  ${FILE} -o ${OUTPUT} ${LINKER_FLAG}
-clean: build
-	@echo "Cleaning tmp files..."
+	@echo "Building binary ..."
+	@${COMPILER} -c ${BASE_FLAGS} ${COMPILER_FLAGS} ${SIMD_FLAGS} ${FILE} -o ${BINARY} ${LIBRARY_FLAGS}
+link: build
+	@echo "Linking ..."
+	@${COMPILER}  ${BINARY} -o ${OUTPUT} ${LINKER_FLAGS} ${LIBRARY_FLAGS} ${PTHREAD_FLAGS} 
+clean: link
+	@echo "Cleaning tmp files ..."
 	@rm -if *tmp*

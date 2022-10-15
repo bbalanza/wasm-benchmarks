@@ -1,4 +1,4 @@
-localhost:2028 {
+greenlab.myddns.me {
 	file_server browse
         root ../
         header {

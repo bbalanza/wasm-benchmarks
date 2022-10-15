@@ -400,7 +400,7 @@ int main() {
     std::cin.sync_with_stdio(false);
     std::cout.sync_with_stdio(false);
 
-    std::ifstream file("../assets/fasta.txt");
+    std::ifstream file("../../assets/fasta.txt");
 
     revcomp::reverse_complement_fasta_stream(file, std::cout);
     return 0;

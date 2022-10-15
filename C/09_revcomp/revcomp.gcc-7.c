@@ -406,7 +406,7 @@ void write_Sequence_Reverse_Complement(uint8_t * sequence
 }
 
 
-int revcomp(void){
+int main(void){
 
 	// We initialize the REVERSE_COMPLEMENT_LOOKUP table here but only fill in
 	// elements for characters that will be in the range of ASCII characters
@@ -422,10 +422,12 @@ int revcomp(void){
 	uintnative_t sequence_Capacity=READ_SIZE, sequence_Size=0;
 	uint8_t * sequence=malloc(sequence_Capacity);
 
+	// Added to make it WASM compatible
+	int fasta = open("../../assets/fasta.txt", O_RDONLY, 0777);
 	// Read in sequence data until we reach the end of the file or encounter an
 	// error.
 	for(uintnative_t bytes_Read
-	  ; (bytes_Read=read(STDIN_FILENO, &sequence[sequence_Size], READ_SIZE));){
+	  ; (bytes_Read=read(fasta, &sequence[sequence_Size], READ_SIZE));){
 
 		// Search the read in chunk of data for a '>' to see if any sequences
 		// are being started.
