@@ -406,7 +406,7 @@ void write_Sequence_Reverse_Complement(uint8_t * sequence
 }
 
 
-int main(void){
+int revcomp(void){
 
 	// We initialize the REVERSE_COMPLEMENT_LOOKUP table here but only fill in
 	// elements for characters that will be in the range of ASCII characters

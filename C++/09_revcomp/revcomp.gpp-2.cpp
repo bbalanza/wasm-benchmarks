@@ -4,12 +4,15 @@
 // contributed by Adam Kewley
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 
 #ifdef SIMD
 #include <immintrin.h>
 #endif
+
+#include <fstream>
 
 namespace {
     using std::istream;
@@ -392,16 +395,13 @@ namespace revcomp {
     }
 }
 
-int revcomp() {
+int main() {
     // required for *large* (e.g. 1 GiB) inputs
     std::cin.sync_with_stdio(false);
     std::cout.sync_with_stdio(false);
 
-    revcomp::reverse_complement_fasta_stream(std::cin, std::cout);
-    return 0;
-}
+    std::ifstream file("../assets/fasta.txt");
 
-int main() {
-    int argc = 2;
-    char * argv[] = {}
+    revcomp::reverse_complement_fasta_stream(file, std::cout);
+    return 0;
 }

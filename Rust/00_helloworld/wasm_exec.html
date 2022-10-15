@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>hello-wasm example</title>
+  </head>
+  <body>
+    <script type="module">
+      import init, { helloworld } from "./pkg/helloworld.js";
+      init().then(() => {
+        helloworld();
+      });
+    </script>
+  </body>
+</html>
