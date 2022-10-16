@@ -1,13 +1,13 @@
 .PHONY: all build clean
 
-COMPILER = sudo ../emsdk/upstream/emscripten/emcc
-FILE = pidigits.gcc-2.c 
-OUTPUT = pidigits.gcc-2.gcc_run.html
+COMPILER = sudo ../../emsdk/upstream/emscripten/emcc
+FILE = spectralnorm.gcc-5.c 
+OUTPUT = spectralnorm.gcc-5.gcc_run.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge
-SIMD_FLAGS = 
+SIMD_FLAGS = -msse2 
 PTHREAD_FLAGS = 
-EXTRA_FLAGS = 
-LINKER_FLAG = -lgmp
+EXTRA_FLAGS = -DSIMDE_ENABLE_OPENMP -fopenmp-simd 
+LINKER_FLAG = -lm
 
 EXPORTED_FUNCTIONS = _main
 EXPORTED_RUNTIME_METHODS = ccall,cwrap
