@@ -3,7 +3,7 @@
 COMPILER = sudo /workspaces/01-wasm/emsdk/upstream/emscripten/emcc
 FILE = revcomp.gpp-2.cpp
 BINARY = revcomp.gpp-2.o
-OUTPUT = revcomp.gpp-2.html
+OUTPUT = revcomp.gpp-2.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge 
 SIMD_FLAGS = -msimd128 -mavx 
 COMPILER_FLAGS = -std=c++11

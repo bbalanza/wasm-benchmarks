@@ -3,7 +3,7 @@
 COMPILER = sudo /workspaces/01-wasm/emsdk/upstream/emscripten/emcc
 FILE = revcomp.gcc-7.c
 BINARY = revcomp.gcc-7.o
-OUTPUT = revcomp.gcc-7.html
+OUTPUT = revcomp.gcc-7.gcc_run.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge 
 SIMD_FLAGS = -msimd128 -mavx 
 COMPILER_FLAGS =
