@@ -3,7 +3,7 @@
 COMPILER = sudo /workspaces/01-wasm-c/emsdk/upstream/emscripten/emcc
 FILE = fasta.gpp-8.cpp
 BINARY = fasta.gpp-8.o
-OUTPUT = fasta.gpp-8.html
+OUTPUT = fasta.gpp-8.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge -std=c++17
 SIMD_FLAGS = -msimd128 -msse2
 COMPILER_FLAGS = -s USE_BOOST_HEADERS=1 -s USE_PTHREADS=1 

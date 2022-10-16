@@ -3,7 +3,7 @@
 COMPILER = sudo /workspaces/01-wasm-c/emsdk/upstream/emscripten/emcc
 FILE = mandelbrot.gpp-0.cpp
 BINARY = mandelbrot.gpp-0.o
-OUTPUT = mandelbrot.gpp-0.html
+OUTPUT = mandelbrot.gpp-0.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge -std=c++17
 SIMD_FLAGS = 
 EXTRA_FLAGS = -sALLOW_MEMORY_GROWTH

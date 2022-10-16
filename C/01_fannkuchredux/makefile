@@ -2,7 +2,7 @@
 
 COMPILER = sudo ../../emsdk/upstream/emscripten/emcc
 FILE = fannkuchredux.gcc-6.c 
-OUTPUT = fannkuchredux.gcc-6.gcc_run.html
+OUTPUT = fannkuchredux.gcc-6.gcc_run.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge 
 SIMD_FLAGS = -msimd128 -msse4.1 
 PTHREAD_FLAGS = -pthread -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8

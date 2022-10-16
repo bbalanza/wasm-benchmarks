@@ -2,7 +2,7 @@
 
 COMPILER = sudo ../emsdk/upstream/emscripten/emcc
 FILE = fasta.gcc-9.c 
-OUTPUT = fasta.gcc-9.gcc_run.html
+OUTPUT = fasta.gcc-9.gcc_run.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge
 BASE_SIMD_FLAGS = -msimd128
 SIMD_FLAGS = ${BASE_SIMD_FLAGS} 

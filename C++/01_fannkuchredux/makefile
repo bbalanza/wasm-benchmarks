@@ -1,9 +1,9 @@
 .PHONY: all build clean
 
 COMPILER = sudo /workspaces/01-wasm-c/emsdk/upstream/emscripten/emcc
-FILE = fannkuchredux.gpp-5.c++
-BINARY = fannkuchredux.gpp-5.c++.o
-OUTPUT = fannkuchredux.gpp-5.html
+FILE = fannkuchredux.gpp-5.cpp
+BINARY = fannkuchredux.gpp-5.cppo
+OUTPUT = fannkuchredux.gpp-5.js
 BASE_FLAGS = -c -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge -std=c++11
 SIMD_FLAGS = -msimd128 -mavx
 PTHREAD_FLAGS = 

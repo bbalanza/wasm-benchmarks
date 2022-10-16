@@ -2,7 +2,7 @@
 
 COMPILER = sudo ../../emsdk/upstream/emscripten/emcc
 FILE = nbody.gcc-8.c 
-OUTPUT = nbody.gcc-8.gcc_run.html
+OUTPUT = nbody.gcc-8.gcc_run.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge
 SIMD_FLAGS = -msimd128 -mavx 
 PTHREAD_FLAGS = 

@@ -2,7 +2,7 @@
 
 COMPILER = sudo ../emsdk/upstream/emscripten/emcc
 FILE = mandelbrot.gcc-6.c 
-OUTPUT = mandelbrot.gcc-6.gcc_run.html
+OUTPUT = mandelbrot.gcc-6.gcc_run.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge
 SIMD_FLAGS = -msse2 
 PTHREAD_FLAGS = 

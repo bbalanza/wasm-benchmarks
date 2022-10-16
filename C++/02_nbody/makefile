@@ -1,9 +1,9 @@
 .PHONY: all build clean
 
 COMPILER = sudo /workspaces/01-wasm-c/emsdk/upstream/emscripten/emcc
-FILE = nbody.gpp-2.c++
-BINARY = nbody.gpp-2.c++.o
-OUTPUT = nbody.gpp-2.html
+FILE = nbody.gpp-2.cpp
+BINARY = nbody.gpp-2.cppo
+OUTPUT = nbody.gpp-2.js
 BASE_FLAGS = -c -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge -std=c++17
 SIMD_FLAGS = -msimd128 -mavx
 PTHREAD_FLAGS = 
