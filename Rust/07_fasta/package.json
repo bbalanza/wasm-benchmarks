@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "scripts": {
+    "build:wasm-st": "wasm-pack build --target web",
+    "build:wasm-mt": "cross-env RUSTFLAGS=\"-C target-feature=+atomics,+bulk-memory,+mutable-globals\" rustup run nightly-2022-04-07 wasm-pack build --target web --out-dir pkg-parallel -- -Z build-std=panic_abort,std",
+    "build:wasm": "run-p build:wasm-st build:wasm-mt",
+    "build": "npm run build:wasm && webpack build ./wasm_exec.js --mode development -o dist --output-filename wasm_exec.js && cp wasm_exec.html dist/"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5",
+    "wasm-pack": "=0.10.1",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "comlink": "^4.3.1"
+  }
+}

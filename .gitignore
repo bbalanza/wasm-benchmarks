@@ -10,3 +10,5 @@ assets
 *data
 webserver
 dist
+*.cargo
+package-lock.json
