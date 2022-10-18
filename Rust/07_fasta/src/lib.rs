@@ -16,6 +16,15 @@ use std::io::{self, ErrorKind, Write};
 use std::sync::Arc;
 use std::thread;
 use wasm_bindgen::prelude::*;
+pub use wasm_bindgen_rayon::init_thread_pool; 
+
+fn log (s: &str) {
+    use web_sys::console;
+    console::log_1(&s.into())
+}
+macro_rules! console_log {
+    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
+}
 
 const LINE_LENGTH: usize = 60;
 const IM: u32 = 139968;
@@ -253,7 +262,7 @@ fn fasta_random_par(
 }
 
 #[wasm_bindgen]
-pub fn main() {
+pub fn fasta() {
     let n = std::env::args_os()
         .nth(1)
         .and_then(|s| s.into_string().ok())
@@ -272,7 +281,7 @@ pub fn main() {
                                 CCACTGCACTCCAGCCTGGGCGACAGAGCGAGACTCCGTC\
                                 TCAAAAA";
 
-        println!(">ONE Homo sapiens alu");
+        console_log!(">ONE Homo sapiens alu");
         fasta_repeat(&alu, n * 2).unwrap();
     }
 
@@ -298,7 +307,7 @@ pub fn main() {
             (b'Y', 0.02),
         ]);
 
-        println!(">TWO IUB ambiguity codes");
+        console_log!(">TWO IUB ambiguity codes");
         fasta_random_par(rng.clone(), iub, num_threads).unwrap();
     }
 
@@ -313,7 +322,7 @@ pub fn main() {
             (b't', 0.3015094502008),
         ]);
 
-        println!(">THREE Homo sapiens frequency");
+        console_log!(">THREE Homo sapiens frequency");
         fasta_random_par(rng, homosapiens, num_threads).unwrap();
     }
 }

@@ -8,10 +8,18 @@
 // contributed by Cristi Cobzarenco (@cristicbz)
 // contributed by Andre Bogus
 
-extern crate rayon;
 use rayon::prelude::*;
 use std::ops::*;
 use wasm_bindgen::prelude::*;
+pub use wasm_bindgen_rayon::init_thread_pool; 
+
+fn log (s: &str) {
+    use web_sys::console;
+    console::log_1(&s.into())
+}
+macro_rules! console_log {
+    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
+}
 
 #[derive(Clone, Copy)]
 struct F64x2(f64, f64);
@@ -49,15 +57,15 @@ impl Div for F64x2 {
     }
 }
 #[wasm_bindgen]
-pub fn main() {
+pub fn spectralnorm() {
     let n = std::env::args().nth(1)
         .and_then(|n| n.parse().ok())
         .unwrap_or(100);
-    let answer = spectralnorm(n);
-    println!("{:.9}", answer);
+    let answer = run(n);
+    console_log!("{:.9}", answer);
 }
 
-fn spectralnorm(n: usize) -> f64 {
+fn run(n: usize) -> f64 {
     // Group all vectors in pairs of two for SIMD convenience.
     assert!(n % 2 == 0, "only even lengths are accepted");
     let mut u = vec![F64x2::splat(1.0); n / 2];

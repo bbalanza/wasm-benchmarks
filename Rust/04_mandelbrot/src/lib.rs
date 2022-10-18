@@ -4,12 +4,19 @@
 // Contributed by Kevin Miller
 // Converted from C to Rust by Tung Duong
 
-extern crate rayon;
-
 use std::ops::{Add, Sub, Mul};
 use std::io::Write;
 use rayon::prelude::*;
 use wasm_bindgen::prelude::*;
+pub use wasm_bindgen_rayon::init_thread_pool; 
+
+fn log (s: &str) {
+    use web_sys::console;
+    console::log_1(&s.into())
+}
+macro_rules! console_log {
+    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
+}
 
 
 #[allow(non_camel_case_types)]
@@ -117,14 +124,14 @@ fn mand64(init_r: &[f64x2;32], init_i : f64x2, out : &mut [u8]) {
 }
 
 #[wasm_bindgen]
-pub fn main(){
+pub fn mandelbrot(){
 	let mut width = std::env::args_os().nth(1)
         .and_then(|s| s.into_string().ok())
         .and_then(|n| n.parse().ok())
         .unwrap_or(16000);
     width = (width+7) & !7;
     
-    println!("P4\n{} {}", width, width);
+    console_log!("P4\n{} {}", width, width);
     let mut r0 = vec![f64x2(0.0,0.0); width/2];
     let mut i0 = vec![0.0; width];
 
