@@ -5,11 +5,19 @@
 // contributed by TeXitoi
 // contributed by Cristi Cobzarenco
 
-extern crate rayon;
-
 use std::{cmp, mem};
-use rayon::prelude::*;
 use wasm_bindgen::prelude::*;
+
+use rayon::prelude::*;
+pub use wasm_bindgen_rayon::init_thread_pool; 
+
+fn log (s: &str) {
+    use web_sys::console;
+    console::log_1(&s.into())
+}
+macro_rules! console_log {
+    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
+}
 
 // This value controls the preferred maximum number of  blocks the workload is
 // broken up into. The actual value may be one higher (if the number of
@@ -137,11 +145,11 @@ fn fannkuch(n: i32) -> (i32, i32) {
 }
 
 #[wasm_bindgen]
-pub fn main() {
+pub fn fannkuchredux() {
     let n = std::env::args().nth(1)
         .and_then(|n| n.parse().ok())
         .unwrap_or(7);
 
     let (checksum, maxflips) = fannkuch(n);
-    println!("{}\nPfannkuchen({}) = {}", checksum, n, maxflips);
+    console_log!("{}\nPfannkuchen({}) = {}", checksum, n, maxflips);
 }

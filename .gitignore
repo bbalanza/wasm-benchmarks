@@ -1,6 +1,7 @@
 emsdk
 *target
 *pkg
+*pkg-parallel
 *Cargo.lock
 .vscode
 .devcontainer
@@ -8,3 +9,4 @@ node_modules
 assets
 *data
 webserver
+dist

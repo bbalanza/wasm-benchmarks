@@ -225,9 +225,17 @@ fn run(n: usize) -> (f64, f64) {
     (energy_before, energy_after)
 }
 
+fn log (s: &str) {
+    use web_sys::console;
+    console::log_1(&s.into())
+}
+macro_rules! console_log {
+    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
+}
+
 #[wasm_bindgen]
-pub fn main() {
+pub fn nbody() {
     let n: usize = std::env::args().nth(1).and_then(|s| s.parse().ok()).unwrap_or(1000);
     let (energy_before, energy_after) = run(n);
-    println!("{:.9}\n{:.9}", energy_before, energy_after);
+    console_log!("{:.9}\n{:.9}", energy_before, energy_after);
 }
