@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>NBody Benchmark</title>
+  </head>
+  <body>
+    <script type="module">
+      import init, { nbody } from "./pkg/nbody.js";
+      await init();
+      await nbody();
+    </script>
+  </body>
+</html>
