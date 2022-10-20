@@ -21,7 +21,10 @@ fn log (s: &str) {
 macro_rules! console_log {
     ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
 }
-
+#[wasm_bindgen(raw_module = "/workspaces/01-wasm/assets/utils.js")]
+extern "C" {
+    async fn fetchAsset(uri: &str) -> JsValue; 
+}
 const READ_SIZE: usize = 1 << 16;
 
 /// Length of a normal line including the terminating \n.
@@ -316,29 +319,27 @@ async fn revcomp_run() -> io::Result<()> {
     // let stdin = unsafe { File::from_raw_fd(0) };
     // #[cfg(unix)]
     // let mut stdout = unsafe { File::from_raw_fd(1) };
-
     // #[cfg(not(unix))]
 
-    let input: &[u8] = &[];
-    console_log!("This executed 328");
+    let fasta = JsValue::as_string(&fetchAsset("https://localhost:2028/assets/fasta.txt").await).unwrap();
     // #[cfg(not(unix))]
     // let stdin = stdin.lock();
     // #[cfg(not(unix))]
     // let mut stdout = io::stdout();
     
-    let mut reader = SequenceReader::new(input);
+    let mut reader = SequenceReader::new(fasta.as_bytes());
 
     while let Some(seq) = reader.next() {
         let mut seq = seq?;
         seq.reverse_complement();
-        // stdout.write_all(seq.as_slice())?;
+        console_log!("{}", &std::str::from_utf8(seq.as_slice()).unwrap());
     }
 
     Ok(())
 }
     
 #[wasm_bindgen]
-pub async fn revcomp() -> Result<str, JsValue>{
+pub async fn revcomp() -> Result<(), JsValue> {
     revcomp_run().await;
-    Ok("works")
+    Ok(())
 }
