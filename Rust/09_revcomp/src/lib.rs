@@ -4,16 +4,23 @@
 // Contributed by Ryohei Machida
 // Inspired by C++ #2 implementation Adam Kewley
 
-extern crate memchr;
-extern crate rayon;
-
 use memchr::memchr;
+use rayon;
 use std::cmp;
 use std::fs::File;
 use std::io::{self, Read, Write};
 #[cfg(unix)]
 use std::os::unix::io::FromRawFd;
 use wasm_bindgen::prelude::*;
+pub use wasm_bindgen_rayon::init_thread_pool; 
+
+fn log (s: &str) {
+    use web_sys::console;
+    console::log_1(&s.into())
+}
+macro_rules! console_log {
+    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
+}
 
 const READ_SIZE: usize = 1 << 16;
 
@@ -250,7 +257,6 @@ impl<R: Read> SequenceReader<R> {
             if self.next_pos >= self.buf.len() {
                 return None;
             }
-
             // remove current sequence (first `self.next_pos` bytes)
             self.buf.copy_within(self.next_pos.., 0);
             self.buf.truncate(self.buf.len() - self.next_pos);
@@ -304,32 +310,35 @@ impl<R: Read> SequenceReader<R> {
     }
 }
 
-fn revcomp() -> io::Result<()> {
-    // Use unbuffered stdin and stdout on unix platform
-    #[cfg(unix)]
-    let stdin = unsafe { File::from_raw_fd(0) };
-    #[cfg(unix)]
-    let mut stdout = unsafe { File::from_raw_fd(1) };
+async fn revcomp_run() -> io::Result<()> {
+    // // Use unbuffered stdin and stdout on unix platform
+    // #[cfg(unix)]
+    // let stdin = unsafe { File::from_raw_fd(0) };
+    // #[cfg(unix)]
+    // let mut stdout = unsafe { File::from_raw_fd(1) };
 
-    #[cfg(not(unix))]
-    let stdin = io::stdin();
-    #[cfg(not(unix))]
-    let stdin = stdin.lock();
-    #[cfg(not(unix))]
-    let mut stdout = io::stdout();
+    // #[cfg(not(unix))]
 
-    let mut reader = SequenceReader::new(stdin);
+    let input: &[u8] = &[];
+    console_log!("This executed 328");
+    // #[cfg(not(unix))]
+    // let stdin = stdin.lock();
+    // #[cfg(not(unix))]
+    // let mut stdout = io::stdout();
+    
+    let mut reader = SequenceReader::new(input);
 
     while let Some(seq) = reader.next() {
         let mut seq = seq?;
         seq.reverse_complement();
-        stdout.write_all(seq.as_slice())?;
+        // stdout.write_all(seq.as_slice())?;
     }
 
     Ok(())
 }
     
 #[wasm_bindgen]
-pub fn main() {
-    revcomp();
+pub async fn revcomp() -> Result<str, JsValue>{
+    revcomp_run().await;
+    Ok("works")
 }
