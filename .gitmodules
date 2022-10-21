@@ -1,0 +1,3 @@
+[submodule "android-runner"]
+	path = android-runner
+	url = https://github.com/pieterhop/android-runner.git
