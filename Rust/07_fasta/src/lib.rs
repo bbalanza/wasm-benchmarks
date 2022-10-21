@@ -165,7 +165,7 @@ fn gcd(a: usize, b: usize) -> usize {
     }
 }
 
-fn fasta_repeat(seq: &[u8], n: usize) -> io::Result<()> {
+async fn fasta_repeat(seq: &[u8], n: usize) -> io::Result<()> {
     let num_lines_per_buf = seq.len() / gcd(seq.len(), LINE_LENGTH);
     let buf_size = num_lines_per_buf * (LINE_LENGTH + 1);
     let mut buf = vec![0u8; buf_size];
@@ -194,7 +194,7 @@ fn fasta_repeat(seq: &[u8], n: usize) -> io::Result<()> {
         n2 += 1;
     }
 
-    stdout.write_all(&buf[..n2])?;
+    console_log!("{}", std::str::from_utf8(&buf[..n2]).unwrap());
     Ok(())
 }
 
@@ -240,7 +240,7 @@ fn fasta_random(
     }
 }
 
-fn fasta_random_par(
+async fn fasta_random_par(
     rng: Arc<Mutex<MyRandom>>,
     wr: WeightedRandom<u8>,
     num_threads: u16,
@@ -262,7 +262,7 @@ fn fasta_random_par(
 }
 
 #[wasm_bindgen]
-pub fn fasta() {
+pub async fn fasta() {
     let n = std::env::args_os()
         .nth(1)
         .and_then(|s| s.into_string().ok())
@@ -282,7 +282,7 @@ pub fn fasta() {
                                 TCAAAAA";
 
         console_log!(">ONE Homo sapiens alu");
-        fasta_repeat(&alu, n * 2).unwrap();
+        fasta_repeat(&alu, n * 2).await.unwrap();
     }
 
     let rng = Arc::new(Mutex::new(MyRandom::new(n * 3, num_threads)));
@@ -308,9 +308,8 @@ pub fn fasta() {
         ]);
 
         console_log!(">TWO IUB ambiguity codes");
-        fasta_random_par(rng.clone(), iub, num_threads).unwrap();
+        fasta_random_par(rng.clone(), iub, num_threads).await.unwrap();
     }
-
     rng.lock().reset(n * 5);
 
     // Homo sapience frequency
@@ -323,6 +322,6 @@ pub fn fasta() {
         ]);
 
         console_log!(">THREE Homo sapiens frequency");
-        fasta_random_par(rng, homosapiens, num_threads).unwrap();
+        fasta_random_par(rng, homosapiens, num_threads).await.unwrap();
     }
 }
