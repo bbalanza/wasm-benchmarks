@@ -1,0 +1,7 @@
+version: '3'
+services:
+  c-based:
+    image: brauliobalanza/devcontainer:emscripten
+    volumes:
+      - .:/workspace:cached
+    command: /bin/zsh

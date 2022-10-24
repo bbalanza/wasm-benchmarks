@@ -1,0 +1,7 @@
+{
+  "name": "C Based",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "c-based",
+  "workspaceFolder": "/workspace/C-Based",
+	"remoteUser": "vscode"
+}
