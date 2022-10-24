@@ -8,6 +8,5 @@ emsdk
 node_modules
 assets
 *data
-dist
 *.cargo
 package-lock.json
