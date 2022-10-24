@@ -1,0 +1,21 @@
+.PHONY: all build clean
+
+COMPILER = sudo ../emsdk/upstream/emscripten/emcc
+FILE = mandelbrot.gcc-6.c 
+OUTPUT = mandelbrot.gcc-6.gcc_run.js
+BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge
+SIMD_FLAGS = -msse2 
+PTHREAD_FLAGS = 
+EXTRA_FLAGS = -DSIMDE_ENABLE_OPENMP -fopenmp-simd -fno-finite-math-only -sALLOW_MEMORY_GROWTH
+LINKER_FLAG = -lm
+
+EXPORTED_FUNCTIONS = _main
+EXPORTED_RUNTIME_METHODS = ccall,cwrap
+
+all: build clean
+build: ${FILE}
+	@echo "Building..."
+	@${COMPILER} ${BASE_FLAGS} ${EXTRA_FLAGS} -msimd128 ${SIMD_FLAGS} -s EXPORTED_FUNCTIONS=${EXPORTED_FUNCTIONS} -s EXPORTED_RUNTIME_METHODS=${EXPORTED_RUNTIME_METHODS}  ${FILE} -o ${OUTPUT} ${LINKER_FLAG}
+clean: build
+	@echo "Cleaning tmp files..."
+	@rm -if *tmp*
