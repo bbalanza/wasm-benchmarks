@@ -15,9 +15,13 @@ export async function stopRun(uri = '') {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ a: 1, b: 2 }),
+    body: JSON.stringify({Done: true}),
   }
-  const resp = await fetch(uri, request)
-  console.log(resp.status)
+  try {
+    const resp = await fetch(uri, request)
+    console.log(resp.status)
+  } catch (e){
+    console.log(e)
+  }
   return 
 }
