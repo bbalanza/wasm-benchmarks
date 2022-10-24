@@ -2,6 +2,7 @@
   "name": "C Based",
   "dockerComposeFile": ["../docker-compose.yml"],
   "service": "c-based",
+  "shutdownAction": "none",
   "workspaceFolder": "/workspace/C-Based",
 	"remoteUser": "vscode"
 }

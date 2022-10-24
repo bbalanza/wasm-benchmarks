@@ -10,7 +10,8 @@ async function initHandler() {
       await multiThread.default();
       await multiThread.initThreadPool(navigator.hardwareConcurrency);
       await multiThread.mandelbrot();
-      await stopRun("http://greenlab.myddns.me:2222")
+      console.log("=DONE=")
+      await stopRun("https://greenlab.myddns.me:2222")
       return multiThread;
     })()
   ]);
