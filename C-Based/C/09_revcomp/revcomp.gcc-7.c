@@ -423,7 +423,7 @@ int main(void){
 	uint8_t * sequence=malloc(sequence_Capacity);
 
 	// Added to make it WASM compatible
-	int fasta = open("../../assets/fasta.txt", O_RDONLY, 0777);
+	int fasta = open("../../../assets/fasta.txt", O_RDONLY, 0777);
 	// Read in sequence data until we reach the end of the file or encounter an
 	// error.
 	for(uintnative_t bytes_Read

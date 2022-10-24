@@ -1,21 +1,23 @@
 .PHONY: all build clean
 
-COMPILER = sudo ../../emsdk/upstream/emscripten/emcc
+COMPILER = emcc
 FILE = nbody.gcc-8.c 
+BINARY = nbody.gcc-8.o
 OUTPUT = nbody.gcc-8.gcc_run.js
-BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge
-SIMD_FLAGS = -msimd128 -mavx 
+BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer 
+SIMD_FLAGS = -msimd128 -mavx
+COMPILER_FLAGS = 
+LINKER_FLAGS = -static
 PTHREAD_FLAGS = 
-EXTRA_FLAGS = -static 
-LINKER_FLAG = -lm
+LIBRARY_FLAGS = -march=ivybridge -lm
 
-EXPORTED_FUNCTIONS = _main
-EXPORTED_RUNTIME_METHODS = ccall,cwrap
-
-all: build clean
+all: build link clean
 build: ${FILE}
-	@echo "Building..."
-	@${COMPILER} ${BASE_FLAGS}  ${SIMD_FLAGS} -s EXPORTED_FUNCTIONS=${EXPORTED_FUNCTIONS} -s EXPORTED_RUNTIME_METHODS=${EXPORTED_RUNTIME_METHODS}  ${FILE} -o ${OUTPUT} ${LINKER_FLAG}
-clean: build
-	@echo "Cleaning tmp files..."
-	@rm -if *tmp*
+	@echo "Building binary ..."
+	@${COMPILER} -c ${BASE_FLAGS} ${COMPILER_FLAGS} ${SIMD_FLAGS} ${FILE} -o ${BINARY}
+link: build
+	@echo "Linking ..."
+	@${COMPILER}  ${BINARY} -o ${OUTPUT} ${LINKER_FLAGS} ${LIBRARY_FLAGS} ${PTHREAD_FLAGS} 
+clean: link
+	@echo "Cleaning tmp files ..."
+	@rm -if *tmp* *temp*
