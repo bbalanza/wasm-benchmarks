@@ -3,5 +3,5 @@
   "dockerComposeFile": ["../docker-compose.yml"],
   "service": "c-based",
   "shutdownAction": "none",
-  "workspaceFolder": "/workspace/c-based"
+  "workspaceFolder": "/workspace"
 }
