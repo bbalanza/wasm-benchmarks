@@ -1,21 +1,23 @@
 .PHONY: all build clean
 
-COMPILER = sudo ../emsdk/upstream/emscripten/emcc
+COMPILER = emcc
 FILE = mandelbrot.gcc-6.c 
+BINARY = mandelbrot.gcc-6.o  
 OUTPUT = mandelbrot.gcc-6.gcc_run.js
-BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -march=ivybridge
-SIMD_FLAGS = -msse2 
+BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer 
+SIMD_FLAGS = -msimd128 -msse2 
 PTHREAD_FLAGS = 
-EXTRA_FLAGS = -DSIMDE_ENABLE_OPENMP -fopenmp-simd -fno-finite-math-only -sALLOW_MEMORY_GROWTH
-LINKER_FLAG = -lm
+COMPILER_FLAGS = -DSIMDE_ENABLE_OPENMP -fopenmp-simd -fno-finite-math-only -sALLOW_MEMORY_GROWTH
+PTHREAD_FLAGS = 
+LIBRARY_FLAGS = -march=ivybridge -lm
 
-EXPORTED_FUNCTIONS = _main
-EXPORTED_RUNTIME_METHODS = ccall,cwrap
-
-all: build clean
+all: build link clean
 build: ${FILE}
-	@echo "Building..."
-	@${COMPILER} ${BASE_FLAGS} ${EXTRA_FLAGS} -msimd128 ${SIMD_FLAGS} -s EXPORTED_FUNCTIONS=${EXPORTED_FUNCTIONS} -s EXPORTED_RUNTIME_METHODS=${EXPORTED_RUNTIME_METHODS}  ${FILE} -o ${OUTPUT} ${LINKER_FLAG}
-clean: build
-	@echo "Cleaning tmp files..."
-	@rm -if *tmp*
+	@echo "Building binary ..."
+	@${COMPILER} -c ${BASE_FLAGS} ${COMPILER_FLAGS} ${SIMD_FLAGS} ${FILE} -o ${BINARY}
+link: build
+	@echo "Linking ..."
+	@${COMPILER}  ${BINARY} -o ${OUTPUT} ${LINKER_FLAGS} ${LIBRARY_FLAGS} ${PTHREAD_FLAGS} 
+clean: link
+	@echo "Cleaning tmp files ..."
+	@rm -if *tmp* *temp*
