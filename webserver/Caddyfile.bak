@@ -1,0 +1,14 @@
+greenlab.myddns.me {
+        file_server browse
+        root ../
+        header {
+                Cross-Origin-Opener-Policy: same-origin
+                Cross-Origin-Embedder-Policy: require-corp
+        }
+}
+greenlab.myddns.me:8080 {
+	header {
+                Access-Control-Allow-Origin: *
+	}
+        reverse_proxy http://localhost:8000
+}

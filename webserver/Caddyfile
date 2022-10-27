@@ -1,9 +1,9 @@
 greenlab.myddns.me {
-	file_server browse
+        file_server browse
         root ../
         header {
                 Cross-Origin-Opener-Policy: same-origin
                 Cross-Origin-Embedder-Policy: require-corp
         }
-       reverse_proxy /stop/* 127.0.0.1:8000
+        reverse_proxy /stop/* http://localhost:8000
 }
