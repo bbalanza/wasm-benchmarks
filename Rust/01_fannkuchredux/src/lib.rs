@@ -148,7 +148,7 @@ fn fannkuch(n: i32) -> (i32, i32) {
 pub fn fannkuchredux() {
     let n = std::env::args().nth(1)
         .and_then(|n| n.parse().ok())
-        .unwrap_or(7);
+        .unwrap_or(12);
 
     let (checksum, maxflips) = fannkuch(n);
     console_log!("{}\nPfannkuchen({}) = {}", checksum, n, maxflips);

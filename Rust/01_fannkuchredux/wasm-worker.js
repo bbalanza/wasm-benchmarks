@@ -1,5 +1,5 @@
 import * as Comlink from 'comlink';
-
+import {stopRun} from "../../utils/utils"
 async function initHandler() {
   let multiThread = await Promise.all([
     (async () => {
@@ -9,6 +9,7 @@ async function initHandler() {
       await multiThread.default();
       await multiThread.initThreadPool(navigator.hardwareConcurrency);
       await multiThread.fannkuchredux();
+      await stopRun({log: "*DONE*"})
       return multiThread;
     })()
   ]);

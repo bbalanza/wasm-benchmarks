@@ -60,7 +60,7 @@ impl Div for F64x2 {
 pub fn spectralnorm() {
     let n = std::env::args().nth(1)
         .and_then(|n| n.parse().ok())
-        .unwrap_or(100);
+        .unwrap_or(5500);
     let answer = run(n);
     console_log!("{:.9}", answer);
 }
