@@ -1,4 +1,4 @@
-#!/home/pi/wasm-benchmarks/mitmproxy/mitmproxy/bin/python3
+#!/home/pi/wasm-benchmarks/mitmproxy/mitproxy-venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
