@@ -1,3 +1,6 @@
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 /* The Computer Language Benchmarks Game
  * https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
  *
@@ -86,7 +89,7 @@ int spectralnorm(int argc, char**argv) {
    return 0;
 }
 
-int main(){
+int EMSCRIPTEN_KEEPALIVE run(){
    int argc = 2;
    char * argv[] = {"\0", "5500"};
    return spectralnorm(argc, argv);

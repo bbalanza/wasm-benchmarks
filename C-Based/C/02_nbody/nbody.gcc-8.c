@@ -1,3 +1,6 @@
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 // The Computer Language Benchmarks Game
 // https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
 //
@@ -228,7 +231,7 @@ static void output_Energy(body bodies[]){
 }
 
 
-int nbody(int argc, char *argv[]){
+int nbody_run(int argc, char *argv[]){
     offset_Momentum(solar_Bodies);
     output_Energy(solar_Bodies);
     for(intnative_t n=atoi(argv[1]); n--; advance(solar_Bodies));
@@ -236,8 +239,8 @@ int nbody(int argc, char *argv[]){
     return 0;
 }
 
-int main(){
+int EMSCRIPTEN_KEEPALIVE run(){
     int argc = 2;
     char * argv[] = {"\0", "50000"};
-    return nbody(argc, argv);
+    return nbody_run(argc, argv);
 }

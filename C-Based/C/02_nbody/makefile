@@ -3,11 +3,12 @@
 COMPILER = emcc
 FILE = nbody.gcc-8.c 
 BINARY = nbody.gcc-8.o
-OUTPUT = nbody.gcc-8.gcc_run.js
+OUTPUT = ./pkg/emscripten.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer 
 SIMD_FLAGS = -msimd128 -mavx
 COMPILER_FLAGS = 
 LINKER_FLAGS = -static
+ES6_MODULE_FLAGS = -s EXPORT_ES6=1 -s MODULARIZE=1 -s EXPORT_NAME=wasm
 PTHREAD_FLAGS = 
 LIBRARY_FLAGS = -march=ivybridge -lm
 
@@ -17,7 +18,7 @@ build: ${FILE}
 	@${COMPILER} -c ${BASE_FLAGS} ${COMPILER_FLAGS} ${SIMD_FLAGS} ${FILE} -o ${BINARY}
 link: build
 	@echo "Linking ..."
-	@${COMPILER}  ${BINARY} -o ${OUTPUT} ${LINKER_FLAGS} ${LIBRARY_FLAGS} ${PTHREAD_FLAGS} 
+	@${COMPILER}  ${BINARY} -o ${OUTPUT} ${LINKER_FLAGS} ${ES6_MODULE_FLAGS} ${LIBRARY_FLAGS} ${PTHREAD_FLAGS} 
 clean: link
 	@echo "Cleaning tmp files ..."
 	@rm -if *tmp* *temp*

@@ -1,3 +1,6 @@
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 // The Computer Language Benchmarks Game
 // https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
 //
@@ -115,7 +118,7 @@ static void* fannkuch_func(void* param) {
 
 #define MAX_THREADS 64
 
-int run(int argc, char **argv) {   
+int fannkuchredux_run(int argc, char **argv) {   
   int i, n, nthreads = 4; uint64_t tmp = 1;
   __m128i ramp = _mm_setr_epi8(RAMP16);
   __m128i c1 = _mm_set1_epi8(1), v0, v1, v2;
@@ -157,8 +160,8 @@ int run(int argc, char **argv) {
   return 0;
 }
 
-int main(){
+int EMSCRIPTEN_KEEPALIVE run(){
   int argc = 2;
   char * argv[] = {"\0","12"};
-  return run(argc, argv);
+  return fannkuchredux_run(argc, argv);
 }

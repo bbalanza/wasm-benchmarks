@@ -5,3 +5,8 @@ services:
     volumes:
       - .:/workspace:cached
     command: /bin/zsh -c "while sleep 1000; do :; done"
+  rust:
+    image: brauliobalanza/devcontainer:base
+    volumes:
+      - .:/workspace:cached
+    command: /bin/zsh -c "while sleep 1000; do :; done"

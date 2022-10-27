@@ -8,18 +8,21 @@ export async function fetchAsset(uri = '') {
   return await fasta.text();
 }
 
-export async function stopRun(uri = '') {
+export async function stopRun({uri = 'https://greenlab.myddns.me/stop/', log = ''}) {
   const url = new URL(uri)
+  // timeout from https://dmitripavlutin.com/timeout-fetch-request/
+  const timeout = 10000
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
   const request = {
     method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({Done: true}),
+    signal: controller.signal,
+    body: JSON.stringify(log),
   }
   try {
-    const resp = await fetch(uri, request)
-    console.log(resp.status)
+    const resp = await fetch(url, request)
+    clearTimeout(id);
+    console.log("Status: " + resp.status + "\nLog: " + log)
   } catch (e){
     console.log(e)
   }
