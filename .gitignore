@@ -10,3 +10,4 @@ assets
 *data
 *.cargo
 package-lock.json
+*venv
