@@ -241,6 +241,6 @@ int nbody_run(int argc, char *argv[]){
 
 int EMSCRIPTEN_KEEPALIVE run(){
     int argc = 2;
-    char * argv[] = {"\0", "50000"};
+    char * argv[] = {"\0", "1000000"};
     return nbody_run(argc, argv);
 }
