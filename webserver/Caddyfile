@@ -6,8 +6,13 @@ greenlab.myddns.me {
                 Cross-Origin-Embedder-Policy: require-corp
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
        reverse_proxy /stop/* localhost:8000
 }
+=======
+        reverse_proxy /stop/* http://localhost:8000
+}
+>>>>>>> df389604b4439a418cea6bbc25f24d0c5c5ea5ce
 =======
         reverse_proxy /stop/* http://localhost:8000
 }
