@@ -1,0 +1,27 @@
+2022-10-29 06:17:37,665:INFO:ExperimentFactory:/workspace/android-runner/examples/batterystats/config_web.json
+2022-10-29 06:17:37,707:DEBUG:AndroidRunner.Adb:Device list:
+{0: 'kohada.koheiji-himalayas.nord:5555'}
+2022-10-29 06:17:37,707:INFO:Device:Setting logcat buffer size to 57344K
+2022-10-29 06:17:37,712:DEBUG:AndroidRunner.Adb:kohada.koheiji-himalayas.nord:5555: "logcat -G 57344K" returned: 
+adb: device unauthorized.
+This adb server's $ADB_VENDOR_KEYS is not set
+Try 'adb kill-server' if that seems wrong.
+Otherwise check for a confirmation dialog on your device.
+
+2022-10-29 06:17:37,998:DEBUG:PluginHandler:batterystats: Initialized
+2022-10-29 06:17:38,012:DEBUG:Python3:Imported /workspace/android-runner/examples/batterystats/Scripts/before_experiment.py
+2022-10-29 06:17:38,025:DEBUG:Python3:Imported /workspace/android-runner/examples/batterystats/Scripts/before_run.py
+2022-10-29 06:17:38,037:DEBUG:Python3:Imported /workspace/android-runner/examples/batterystats/Scripts/after_launch.py
+2022-10-29 06:17:38,054:DEBUG:Python3:Imported /workspace/android-runner/examples/batterystats/Scripts/interaction.py
+2022-10-29 06:17:38,071:DEBUG:Python3:Imported /workspace/android-runner/examples/batterystats/Scripts/before_close.py
+2022-10-29 06:17:38,089:DEBUG:Python3:Imported /workspace/android-runner/examples/batterystats/Scripts/after_run.py
+2022-10-29 06:17:38,105:DEBUG:Python3:Imported /workspace/android-runner/examples/batterystats/Scripts/after_experiment.py
+2022-10-29 06:17:38,119:DEBUG:AndroidRunner.Adb:kohada.koheiji-himalayas.nord:5555: "pm list packages" returned: 
+adb: device unauthorized.
+This adb server's $ADB_VENDOR_KEYS is not set
+Try 'adb kill-server' if that seems wrong.
+Otherwise check for a confirmation dialog on your device.
+
+2022-10-29 06:17:38,120:ERROR:root:kohada.koheiji-himalayas.nord:5555: Required package com.android.chrome is not installed
+2022-10-29 06:17:38,121:ERROR:root:ConfigError: Required packages ['com.android.chrome'] are not installed on device kohada.koheiji-himalayas.nord:5555
+2022-10-29 06:17:38,121:ERROR:root:An error occurred, the experiment has been stopped. To continue, add progress file argument to experiment startup: --progress  No progress file created

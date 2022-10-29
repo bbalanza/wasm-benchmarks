@@ -1,0 +1,32 @@
+<experiment>
+  <configHash>09144ce8a84fde6610e9e2ae0c6cd6f9</configHash>
+  <outputDir>/workspace/android-runner/examples/batterystats/output/2022.10.29_032202/</outputDir>
+  <runsToRun>
+    </runsToRun>
+  <runsDone>
+    <run runId="0">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/00_helloworld/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="1">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/00_helloworld/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+  <run runId="2">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/01_fannkuchredux/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="3">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/02_nbody/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+  </runsDone>
+</experiment>

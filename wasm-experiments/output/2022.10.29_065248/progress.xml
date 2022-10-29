@@ -1,0 +1,103 @@
+<experiment>
+  <configHash>192092e6182a1f7aebed99ebdc374ec2</configHash>
+  <outputDir>/workspace/android-runner/examples/batterystats/output/2022.10.29_065248/</outputDir>
+  <runsToRun>
+    <run runId="0">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/00_helloworld/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="1">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/00_helloworld/dist/wasm_exec.html</path>
+      <browser>sbrowser</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="2">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/00_helloworld/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="3">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/00_helloworld/dist/wasm_exec.html</path>
+      <browser>sbrowser</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="4">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/01_fannkuchredux/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="5">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/01_fannkuchredux/dist/wasm_exec.html</path>
+      <browser>sbrowser</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="6">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/02_nbody/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="7">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/02_nbody/dist/wasm_exec.html</path>
+      <browser>sbrowser</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="8">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/03_spectralnorm/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="9">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/03_spectralnorm/dist/wasm_exec.html</path>
+      <browser>sbrowser</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="10">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/04_mandelbrot/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="11">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/04_mandelbrot/dist/wasm_exec.html</path>
+      <browser>sbrowser</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="12">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/07_fasta/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="13">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/07_fasta/dist/wasm_exec.html</path>
+      <browser>sbrowser</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="14">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/09_revcomp/dist/wasm_exec.html</path>
+      <browser>chrome</browser>
+      <runCount>1</runCount>
+    </run>
+    <run runId="15">
+      <device>samsungA52</device>
+      <path>https://10.243.134.5:50856/c-based/C/09_revcomp/dist/wasm_exec.html</path>
+      <browser>sbrowser</browser>
+      <runCount>1</runCount>
+    </run>
+  </runsToRun>
+  <runsDone/>
+</experiment>
