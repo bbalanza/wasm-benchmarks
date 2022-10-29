@@ -146,7 +146,7 @@ int mandelbrot(int argc, char ** argv)
 
     // generate the bitmap header
 
-    sprintf((char *)header, "P4\n%ld %ld\n", wid_ht, wid_ht);
+    // sprintf((char *)header, "P4\n%ld %ld\n", wid_ht, wid_ht);
 
 
     // calculate initial values, store in r0, i0
@@ -196,7 +196,7 @@ int mandelbrot(int argc, char ** argv)
 
     // write the data
 
-    long ret = ret = write(STDOUT_FILENO, header, dataLength);
+    // long ret = ret = write(STDOUT_FILENO, header, dataLength);
 
 
     free(buffer);
@@ -205,6 +205,6 @@ int mandelbrot(int argc, char ** argv)
 }
  int EMSCRIPTEN_KEEPALIVE run(){
     int argc = 2;
-    char * argv[] = {"\0", "16000"};
+    char * argv[] = {"\0", "32000"};
     return mandelbrot(argc, argv);
  }

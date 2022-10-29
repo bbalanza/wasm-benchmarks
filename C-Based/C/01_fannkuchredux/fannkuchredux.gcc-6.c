@@ -162,6 +162,6 @@ int fannkuchredux_run(int argc, char **argv) {
 
 int EMSCRIPTEN_KEEPALIVE run(){
   int argc = 2;
-  char * argv[] = {"\0","12"};
+  char * argv[] = {"\0","24"};
   return fannkuchredux_run(argc, argv);
 }

@@ -1,4 +1,4 @@
-export async function fetchAsset(uri = '') {
+export async function fetchAsset(uri = 'https://greenlab.myddns.me/assets/fasta.txt') {
   const url = new URL(uri)
   const fasta = await fetch(url, {
     headers: {
@@ -9,7 +9,7 @@ export async function fetchAsset(uri = '') {
 }
 
 export async function stopRun({uri = 'https://greenlab.myddns.me/stop/', log = ''}) {
-  const url = new URL(uri)
+    const url = new URL(uri)
   // timeout from https://dmitripavlutin.com/timeout-fetch-request/
   const timeout = 10000
   const controller = new AbortController();

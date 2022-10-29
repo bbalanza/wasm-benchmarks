@@ -1,3 +1,6 @@
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 // The Computer Language Benchmarks Game
 // https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
 //
@@ -335,7 +338,7 @@ void * write_Reverse_Complements_Of_Chunks(
 		// potential chunk that this thread will process) to the now unused
 		// semaphore_To_Wait_On_Before_Writing_Chunk.
 		sem_wait(semaphore_To_Wait_On_Before_Writing_Chunk);
-		(void)!write(STDOUT_FILENO, chunk_To_Write, chunk_Size);
+		// (void)!write(STDOUT_FILENO, chunk_To_Write, chunk_Size);
 		sem_post(semaphore_For_Signaling_Chunk_Written);
 		semaphore_For_Signaling_Chunk_Written
 		  =semaphore_To_Wait_On_Before_Writing_Chunk;
@@ -353,7 +356,7 @@ void write_Sequence_Reverse_Complement(uint8_t * sequence
 
 
 	// Write the header line including the header_Newline.
-	(void)!write(STDOUT_FILENO, sequence, header_Newline-sequence+1);
+	// (void)!write(STDOUT_FILENO, sequence, header_Newline-sequence+1);
 
 
 	// front_Character_Of_Last_Assigned_Chunk is initially set to point to the
@@ -406,7 +409,7 @@ void write_Sequence_Reverse_Complement(uint8_t * sequence
 }
 
 
-int main(void){
+int EMSCRIPTEN_KEEPALIVE run(void){
 
 	// We initialize the REVERSE_COMPLEMENT_LOOKUP table here but only fill in
 	// elements for characters that will be in the range of ASCII characters

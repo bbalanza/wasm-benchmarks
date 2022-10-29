@@ -91,6 +91,6 @@ int spectralnorm(int argc, char**argv) {
 
 int EMSCRIPTEN_KEEPALIVE run(){
    int argc = 2;
-   char * argv[] = {"\0", "5500"};
+   char * argv[] = {"\0", "4400"};
    return spectralnorm(argc, argv);
 }
