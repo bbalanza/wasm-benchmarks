@@ -8,7 +8,7 @@
   "duration": 6000000,
   "browsers": ["chrome", "sbrowser"],
   "systrace_path": "/usr/lib/android-sdk/platform-tools/systrace/systrace.py",
-  "powerprofile_path": "android-runner/examples/batterystats/Scripts/power_profile.xml",
+  "powerprofile_path": "/home/pi/wasm-benchmarks/android-runner/examples/batterystats/Scripts/power_profile.xml",
   "paths": [
     "https://greenlab.myddns.me/C-based/C++/00_helloworld/dist/wasm_exec.html",
     "https://greenlab.myddns.me/C-based/C++/00_helloworld/dist/wasm_exec.html",

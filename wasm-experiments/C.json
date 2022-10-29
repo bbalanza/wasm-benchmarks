@@ -6,18 +6,17 @@
   },
   "repetitions": 1,
   "duration": 6000000,
-  "browsers": ["chrome", "sbrowser"],
+  "browsers": ["chrome"],
   "systrace_path": "/usr/lib/android-sdk/platform-tools/systrace/systrace.py",
-  "powerprofile_path": "android-runner/examples/batterystats/Scripts/power_profile.xml",
+  "powerprofile_path": "/home/pi/wasm-benchmarks/android-runner/examples/batterystats/Scripts/power_profile.xml",
   "paths": [
-    "https://greenlab.myddns.me/C-based/C/00_helloworld/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-based/C/00_helloworld/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-based/C/01_fannkuchredux/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-based/C/02_nbody/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-based/C/03_spectralnorm/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-based/C/04_mandelbrot/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-based/C/07_fasta/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-based/C/09_revcomp/dist/wasm_exec.html"
+    "https://greenlab.myddns.me/C-Based/C/00_helloworld/dist/wasm_exec.html",
+    "https://greenlab.myddns.me/C-Based/C/01_fannkuchredux/dist/wasm_exec.html",
+    "https://greenlab.myddns.me/C-Based/C/02_nbody/dist/wasm_exec.html",
+    "https://greenlab.myddns.me/C-Based/C/03_spectralnorm/dist/wasm_exec.html",
+    "https://greenlab.myddns.me/C-Based/C/04_mandelbrot/dist/wasm_exec.html",
+    "https://greenlab.myddns.me/C-Based/C/07_fasta/dist/wasm_exec.html",
+    "https://greenlab.myddns.me/C-Based/C/09_revcomp/dist/wasm_exec.html"
   ],
   "profilers": {
     "batterystats": {

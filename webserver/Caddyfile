@@ -1,3 +1,6 @@
+{
+	debug
+}
 greenlab.myddns.me {
         file_server browse
         root ../
@@ -5,5 +8,5 @@ greenlab.myddns.me {
                 Cross-Origin-Opener-Policy: same-origin
                 Cross-Origin-Embedder-Policy: require-corp
         }
-       reverse_proxy /stop/* localhost:8000
+        reverse_proxy /stop/* localhost:8000
 }

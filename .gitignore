@@ -8,6 +8,7 @@ emsdk
 node_modules
 assets
 *data
+*output
 *.cargo
 package-lock.json
 *venv
