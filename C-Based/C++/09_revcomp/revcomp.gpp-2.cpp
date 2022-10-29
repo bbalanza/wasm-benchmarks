@@ -1,3 +1,6 @@
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 // The Computer Language Benchmarks Game
 // https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
 //
@@ -390,12 +393,12 @@ namespace revcomp {
         while (not in.eof()) {
             read_sequence(in, s);
             reverse_complement(s);
-            write_sequence(out, s);
+            // write_sequence(out, s);
         }
     }
 }
 
-int main() {
+int EMSCRIPTEN_KEEPALIVE run() {
     // required for *large* (e.g. 1 GiB) inputs
     std::cin.sync_with_stdio(false);
     std::cout.sync_with_stdio(false);

@@ -1,21 +1,22 @@
-.PHONY: all build clean
+.PHONY: all build link clean
 
-COMPILER = emcc
+COMPILER = em++
 FILE = nbody.gpp-2.cpp
 BINARY = nbody.gpp-2.cppo
-OUTPUT = nbody.gpp-2.js
+OUTPUT = ./pkg/emscripten.js
 BASE_FLAGS = -c -pipe -Wall -O3 -fomit-frame-pointer -std=c++17
 SIMD_FLAGS = -msimd128 -mavx
-PTHREAD_FLAGS = 
-LINKER_FLAG = -march=ivybridge
+COMPILER_FLAGS = -s USE_BOOST_HEADERS=1 -pthread -s USE_PTHREADS=1 
+ES6_MODULE_FLAGS = -s EXPORT_ES6=1 -s MODULARIZE=1 -s EXPORT_NAME=wasm
+LINKER_FLAGS = -march=ivybridge -std=c++17
 
-all: build clean
+all: build link clean
 build: ${FILE}
 	@echo "Building binary ..."
-	@${COMPILER} ${BASE_FLAGS} ${EXTRA_FLAGS} ${SIMD_FLAGS} ${FILE} -o ${BINARY} 
+	@${COMPILER} -c ${BASE_FLAGS} ${COMPILER_FLAGS} ${SIMD_FLAGS} ${FILE} -o ${BINARY}
 link: build
 	@echo "Linking ..."
-	@${COMPILER} ${EXTRA_FLAGS} ${BINARY} -o ${OUTPUT} ${LINKER_FLAG} 
+	@${COMPILER}  ${BINARY} -o ${OUTPUT} ${LINKER_FLAGS} ${ES6_MODULE_FLAGS} ${LIBRARY_FLAGS} ${PTHREAD_FLAGS} 
 clean: link
 	@echo "Cleaning tmp files ..."
-	@rm -if *tmp* *temp*
+	@rm -if *tmp* *temp* *./dist/*

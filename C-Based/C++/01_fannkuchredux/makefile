@@ -1,22 +1,23 @@
-.PHONY: all build clean
+.PHONY: all build link clean
 
-COMPILER = emcc
-FILE = fannkuchredux.gpp-5.cpp
-BINARY = fannkuchredux.gpp-5.o
-OUTPUT = fannkuchredux.gpp-5.js
-BASE_FLAGS = -c -pipe -Wall -O3 -fomit-frame-pointer  -std=c++11
+COMPILER = em++
+FILE = fannkuchredux.gpp-6.cpp
+BINARY = fannkuchredux.gpp-6.o
+OUTPUT = ./pkg/emscripten.js
+BASE_FLAGS = -c -pipe -Wall -O3 -fomit-frame-pointer  -std=c++17
 SIMD_FLAGS = -msimd128 -mavx
-PTHREAD_FLAGS = 
-EXTRA_FLAGS = -DSIMDE_ENABLE_OPENMP -fopenmp-simd
-LINKER_FLAG = -march=ivybridge
+COMPILER_FLAGS = -DSIMDE_ENABLE_OPENMP -s USE_BOOST_HEADERS=1 -pthread -s USE_PTHREADS=1 
+PTHREAD_FLAGS =  -pthread -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8
+LINKER_FLAGS = -march=ivybridge -DSIMDE_ENABLE_OPENMP -fopenmp-simd -fopenmp  -std=c++17
+ES6_MODULE_FLAGS = -s EXPORT_ES6=1 -s MODULARIZE=1 -s EXPORT_NAME=wasm
 
-all: build clean
+all: build link clean
 build: ${FILE}
 	@echo "Building binary ..."
-	@${COMPILER} ${BASE_FLAGS} ${EXTRA_FLAGS} ${SIMD_FLAGS} ${FILE} -o ${BINARY} 
+	@${COMPILER} -c ${BASE_FLAGS} ${COMPILER_FLAGS} ${SIMD_FLAGS} ${FILE} -o ${BINARY}
 link: build
 	@echo "Linking ..."
-	@${COMPILER} ${EXTRA_FLAGS} ${BINARY} -o ${OUTPUT} ${LINKER_FLAG} 
+	@${COMPILER}  ${BINARY} -o ${OUTPUT} ${LINKER_FLAGS} ${ES6_MODULE_FLAGS} ${LIBRARY_FLAGS} ${PTHREAD_FLAGS} 
 clean: link
 	@echo "Cleaning tmp files ..."
-	@rm -if *tmp* *temp*
+	@rm -if *tmp* *temp* *./dist/*

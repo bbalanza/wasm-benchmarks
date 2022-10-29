@@ -1,3 +1,6 @@
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 /* The Computer Language Benchmarks Game
    https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
 
@@ -225,15 +228,16 @@ int nbody(int argc, char** argv) {
     }
 
     NBodySystem bodies;
-    std::cout << std::setprecision(9) << bodies.energy() << '\n';
+    // std::cout << std::setprecision(9) << bodies.energy() << '\n';
     for (int i=0; i<n; ++i)
         bodies.advance(0.01);
-    std::cout << bodies.energy() << std::endl;
+    // std::cout << bodies.energy() << std::endl;
     return 0;
 }
 
-int main(){
+int EMSCRIPTEN_KEEPALIVE run(){
     int argc = 2;
-    char * argv[] = {"\0", "50000"};
+    char * argv[] = {"\0", "50000000"};
     nbody(argc, argv);
+    return 0;
 }

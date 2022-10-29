@@ -21,4 +21,4 @@ link: build
 	@${COMPILER}  ${BINARY} -o ${OUTPUT} ${LINKER_FLAGS} ${ES6_MODULE_FLAGS} ${LIBRARY_FLAGS} ${PTHREAD_FLAGS} 
 clean: link
 	@echo "Cleaning tmp files ..."
-	@rm -if *tmp* *temp*
+	@rm -if *tmp* *temp* ./dist/*

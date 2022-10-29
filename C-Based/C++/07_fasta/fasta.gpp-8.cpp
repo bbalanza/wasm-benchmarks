@@ -1,3 +1,6 @@
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 // The Computer Language Benchmarks Game
 // https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
 //
@@ -152,7 +155,7 @@ class Writer {
       return false;
     next_thread_id_ = (next_thread_id_ + 1) % thread_count_;
 
-    std::fwrite(data, 1, n, stdout);
+    // std::fwrite(data, 1, n, stdout);
 
     return true;
   }
@@ -197,11 +200,11 @@ inline void fasta_repeat(std::string_view seq, size_t n_chars) {
   auto sequence = gen_repeat_buffer(seq);
   size_t outputBytes = n_chars + n_chars / LINE_LENGTH;
   while (outputBytes >= sequence.size()) {
-    std::fwrite(sequence.data(), sequence.size(), 1, stdout);
+    // std::fwrite(sequence.data(), sequence.size(), 1, stdout);
     outputBytes -= sequence.size();
   }
-  std::fwrite(sequence.data(), outputBytes, 1, stdout);
-  std::fputc('\n', stdout);
+  // std::fwrite(sequence.data(), outputBytes, 1, stdout);
+  // std::fputc('\n', stdout);
 }
 
 template <size_t N>
@@ -255,7 +258,7 @@ void fasta_random_par(RandomLCG& rng, WeightedRandom<N> wr, int num_threads) {
     t.join();
 }
 
-int main(int argc, char* argv[]) {
+int fasta(int argc, char* argv[]) {
   const int n = (argc > 1) ? atoi(argv[1]) : 1000;
   const int num_threads =
       std::min<int>(NUM_THREADS, std::thread::hardware_concurrency());
@@ -269,7 +272,7 @@ int main(int argc, char* argv[]) {
       "TGAACCCGGGAGGCGGAGGTTGCAGTGAGCCGAGATCGCG"
       "CCACTGCACTCCAGCCTGGGCGACAGAGCGAGACTCCGTC"
       "TCAAAAA";
-  std::fputs(">ONE Homo sapiens alu\n", stdout);
+  // std::fputs(">ONE Homo sapiens alu\n", stdout);
   fasta_repeat(alu, n * 2);
 
   constexpr std::array<Nucleotide, 15> iub{{
@@ -282,7 +285,7 @@ int main(int argc, char* argv[]) {
 
   RandomLCG rng(n * 3, num_threads);
 
-  std::fputs(">TWO IUB ambiguity codes\n", stdout);
+  // std::fputs(">TWO IUB ambiguity codes\n", stdout);
   fasta_random_par(rng, WeightedRandom(iub), num_threads);
 
   rng.reset(n * 5);
@@ -294,8 +297,15 @@ int main(int argc, char* argv[]) {
       {'t', 0.3015094502008f},
   }};
 
-  std::fputs(">THREE Homo sapiens frequency\n", stdout);
+  // std::fputs(">THREE Homo sapiens frequency\n", stdout);
   fasta_random_par(rng, WeightedRandom(homosapiens), num_threads);
 
   return 0;
+}
+
+int EMSCRIPTEN_KEEPALIVE run() {
+    int argc = 2;
+    char * argv[] = {"\0", "50000000"};
+    fasta(argc, argv);
+    return 0;
 }

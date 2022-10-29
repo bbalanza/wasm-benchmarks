@@ -1,22 +1,22 @@
 .PHONY: all build clean
 
-COMPILER = emcc
+COMPILER = em++
 FILE = spectralnorm.gpp-0.cpp
 BINARY = spectralnorm.gpp-0.o
-OUTPUT = spectralnorm.gpp-0.js
+OUTPUT = ./pkg/emscripten.js
 BASE_FLAGS = -pipe -Wall -O3 -fomit-frame-pointer -std=c++17
-SIMD_FLAGS = -msimd128 -mavx
-EXTRA_FLAGS = -DSIMDE_ENABLE_OPENMP -fopenmp-simd 
-PTHREAD_FLAGS = -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=8
-LINKER_FLAG = -march=ivybridge 
+SIMD_FLAGS = 
+COMPILER_FLAGS = 
+LINKER_FLAGS = -march=ivybridge -std=c++17 
+ES6_MODULE_FLAGS = -s EXPORT_ES6=1 -s MODULARIZE=1 -s EXPORT_NAME=wasm
 
-all: build clean
+all: build link clean
 build: ${FILE}
 	@echo "Building binary ..."
-	@${COMPILER} -c ${BASE_FLAGS} ${EXTRA_FLAGS} ${SIMD_FLAGS} ${FILE} -o ${BINARY} 
+	@${COMPILER} -c ${BASE_FLAGS} ${COMPILER_FLAGS} ${SIMD_FLAGS} ${FILE} -o ${BINARY}
 link: build
 	@echo "Linking ..."
-	@${COMPILER} ${EXTRA_FLAGS} ${BINARY} -o ${OUTPUT} ${LINKER_FLAG} 
+	@${COMPILER}  ${BINARY} -o ${OUTPUT} ${LINKER_FLAGS} ${ES6_MODULE_FLAGS} ${LIBRARY_FLAGS} ${PTHREAD_FLAGS} 
 clean: link
 	@echo "Cleaning tmp files ..."
-	@rm -if *tmp* *temp*
+	@rm -if *tmp* *temp* *./dist/*

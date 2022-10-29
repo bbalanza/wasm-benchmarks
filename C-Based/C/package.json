@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "scripts": {
+    "build:base": "make && webpack build ./wasm_exec.js --mode production -o dist --output-filename wasm_exec.js && cp wasm_exec.html dist/",
+    "build:helloworld": "cd 00_helloworld && make && webpack build ./wasm_exec.js --mode production -o dist --output-filename wasm_exec.js && cp wasm_exec.html dist/ && cd ..",
+    "build:fannkuchredux": "cd 01_fannkuchredux && make && webpack build ./wasm_exec.js --mode production -o dist --output-filename wasm_exec.js && cp wasm_exec.html dist/ && cd ..",
+    "build:nbody": "cd 02_nbody && make && webpack build ./wasm_exec.js --mode production -o dist --output-filename wasm_exec.js && cp wasm_exec.html dist/ && cd ..",
+    "build:spectralnorm": "cd 03_spectralnorm && make && webpack build ./wasm_exec.js --mode production -o dist --output-filename wasm_exec.js && cp wasm_exec.html dist/ && cd ..",
+    "build:mandelbrot": "cd 04_mandelbrot && make && webpack build ./wasm_exec.js --mode production -o dist --output-filename wasm_exec.js && cp wasm_exec.html dist/ && cd ..",
+    "build:fasta": "cd 07_fasta && make && webpack build ./wasm_exec.js --mode production -o dist --output-filename wasm_exec.js && cp wasm_exec.html dist/ && cd ..",
+    "build:revcomp": "cd 09_revcomp && make && webpack build ./wasm_exec.js --mode production -o dist --output-filename wasm_exec.js && cp wasm_exec.html dist/ && mv ./pkg/emscripten.data dist/ && cd ..",
+    "build:all" : "run-p build:helloworld build:fannkuchredux build:nbody build:spectralnorm build:mandelbrot build:fasta build:revcomp "
+
+  },
+  "devDependencies": {
+    "babel-loader": "^8.2.5",
+    "cross-env": "^7.0.3",
+    "file-loader": "^6.2.0",
+    "glob": "^8.0.3",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "path": "^0.12.7"
+  }
+}
