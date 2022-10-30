@@ -205,6 +205,6 @@ int mandelbrot(int argc, char ** argv)
 }
  int EMSCRIPTEN_KEEPALIVE run(){
     int argc = 2;
-    char * argv[] = {"\0", "32000"};
+    char * argv[] = {"\0", "16000"};
     return mandelbrot(argc, argv);
  }

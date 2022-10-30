@@ -1,22 +1,22 @@
 {
   "type": "web",
   "devices": {
-    "j7wireless": {
+    "samsungA52": {
     }
   },
   "repetitions": 1,
   "duration": 6000000,
   "browsers": ["chrome"],
-  "systrace_path": "/usr/lib/android-sdk/platform-tools/systrace/systrace.py",
-  "powerprofile_path": "/home/pi/wasm-benchmarks/android-runner/examples/batterystats/Scripts/power_profile.xml",
+  "systrace_path": "/home/vscode/.android-sdk/platform-tools/systrace/systrace.py",
+  "powerprofile_path": "/workspace/wasm-experiments/Scripts/power_profile.xml",
   "paths": [
-    "https://greenlab.myddns.me/C-Based/C/00_helloworld/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-Based/C/01_fannkuchredux/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-Based/C/02_nbody/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-Based/C/03_spectralnorm/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-Based/C/04_mandelbrot/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-Based/C/07_fasta/dist/wasm_exec.html",
-    "https://greenlab.myddns.me/C-Based/C/09_revcomp/dist/wasm_exec.html"
+    "https://10.243.134.5:50856/C-Based/C/00_helloworld/dist/wasm_exec.html",
+    "https://10.243.134.5:50856/C-Based/C/01_fannkuchredux/dist/wasm_exec.html",
+    "https://10.243.134.5:50856/C-Based/C/02_nbody/dist/wasm_exec.html",
+    "https://10.243.134.5:50856/C-Based/C/03_spectralnorm/dist/wasm_exec.html",
+    "https://10.243.134.5:50856/C-Based/C/04_mandelbrot/dist/wasm_exec.html",
+    "https://10.243.134.5:50856/C-Based/C/07_fasta/dist/wasm_exec.html",
+    "https://10.243.134.5:50856/C-Based/C/09_revcomp/dist/wasm_exec.html"
   ],
   "profilers": {
     "batterystats": {
@@ -25,7 +25,6 @@
       "python2_path": "python2"
     }
   },
-  "adb_path": "/usr/bin/adb",
   "scripts": {
     "before_experiment": "Scripts/before_experiment.py",
     "before_run": "Scripts/before_run.py",

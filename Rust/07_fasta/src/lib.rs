@@ -228,7 +228,7 @@ pub fn fasta() {
         .nth(1)
         .and_then(|s| s.into_string().ok())
         .and_then(|n| n.parse().ok())
-        .unwrap_or(1000);
+        .unwrap_or(25000000);
 
     let num_threads: u16 = 8 as u16;
 

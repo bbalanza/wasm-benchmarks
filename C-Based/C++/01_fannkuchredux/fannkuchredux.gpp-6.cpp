@@ -196,7 +196,7 @@ int fannkuchredux(int argc, char **argv)
             ++crt_idx;
         }
     }
-    std::cout << checksum << "\nPfannkuchen(" << n << ") = " << (int)max_flips << "\n";
+    // std::cout << checksum << "\nPfannkuchen(" << n << ") = " << (int)max_flips << "\n";
     return 0;
 }
 

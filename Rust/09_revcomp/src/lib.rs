@@ -21,7 +21,7 @@ fn log (s: &str) {
 macro_rules! console_log {
     ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
 }
-#[wasm_bindgen(raw_module = "/workspaces/01-wasm/utils/utils.js")]
+#[wasm_bindgen(raw_module = "/workspace/utils/utils.js")]
 extern "C" {
     async fn fetchAsset(uri: &str) -> JsValue; 
 }
