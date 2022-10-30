@@ -8,7 +8,7 @@ export async function fetchAsset(uri = 'https://greenlab.myddns.me/assets/fasta.
   return await fasta.text();
 }
 
-export async function stopRun({uri = 'https://10.243.134.5:50856/stop/', log = ''}) {
+export async function stopRun({uri = 'https://greenlab.myddns.me/stop/', log = ''}) {
     const url = new URL(uri)
   // timeout from https://dmitripavlutin.com/timeout-fetch-request/
   const timeout = 10000
