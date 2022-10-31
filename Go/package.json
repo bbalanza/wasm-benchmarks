@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "scripts": {
+    "build:helloworld": "cd 00_helloworld && npm run build",
+    "build:fannkuchredux": "cd 01_fannkuchredux && npm run build",
+    "build:nbody": "cd 02_nbody && npm run build",
+    "build:spectralnorm": "cd 03_spectralnorm && npm run build",
+    "build:mandelbrot": "cd 04_mandelbrot && npm run build",
+    "build:fasta": "cd 07_fasta && npm run build",
+    "build:revcomp": "cd 09_revcomp && npm run build",
+    "build:all": "run-p build:helloworld build:fannkuchredux build:nbody build:spectralnorm build:mandelbrot build:fasta build:revcomp"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "file-loader": "^6.2.0",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  }
+}

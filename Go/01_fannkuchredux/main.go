@@ -12,7 +12,7 @@ package main
 
 import (
     "flag"
-    "fmt"
+    // "fmt"
     "log"
     "runtime"
     "strconv"
@@ -135,13 +135,15 @@ func fannkuch(idxMin int, ch chan bool) {
 }
 
 func printResult(n int, res int64, chk int64) {
-    fmt.Printf("%d\nPfannkuchen(%d) = %d\n", chk, n, res)
+    // fmt.Printf("%d\nPfannkuchen(%d) = %d\n", chk, n, res)
 }
 
 func main() {
     flag.Parse()
     if flag.NArg() == 1 {
         n, _ = strconv.Atoi(flag.Arg(0))
+    } else if flag.NArg() < 1 {
+        n = 12
     }
     if n > MAX_N {
         log.Fatalf("Max value accepted for N: %d", MAX_N)

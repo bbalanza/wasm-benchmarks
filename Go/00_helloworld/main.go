@@ -10,5 +10,5 @@ func main() {
 	if len(os.Args) > 1 {
 		name = os.Args[1]
 	}
-	fmt.Printf("Hello world %s!", name)
+	fmt.Printf("Hello world %s!\n", name)
 }

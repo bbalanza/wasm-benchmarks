@@ -9,8 +9,8 @@ package main
 
 import (
    "flag"
-   "fmt"
-   "math"
+   // "fmt"
+   // "math"
    "strconv"
 )
 
@@ -49,6 +49,8 @@ func main() {
    flag.Parse()
    if flag.NArg() > 0 {
       n, _ = strconv.Atoi(flag.Arg(0))
+   } else if flag.NArg() == 0 {
+      n = 5500
    }
 
    N := n
@@ -66,5 +68,5 @@ func main() {
       vBv += u[i] * v[i]
       vv += v[i] * v[i]
    }
-   fmt.Printf("%0.9f\n", math.Sqrt(vBv/vv))
+   // fmt.Printf("%0.9f\n", math.Sqrt(vBv/vv))
 }

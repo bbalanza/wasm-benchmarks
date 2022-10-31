@@ -11,7 +11,7 @@ package main
 
 import (
     "flag"
-    "fmt"
+    // "fmt"
     "math"
     "strconv"
 )
@@ -149,13 +149,15 @@ func main() {
     flag.Parse()
     if flag.NArg() > 0 {
         n, _ = strconv.Atoi(flag.Arg(0))
+    } else if flag.NArg() == 0 {
+        n = 50000000
     }
     offsetMomentum()
 
-    fmt.Printf("%.9f\n", energy())
+    // fmt.Printf("%.9f\n", energy())
     for i := 0; i < n; i++ {
         advance(0.01)
     }
-    fmt.Printf("%.9f\n", energy())
+    // fmt.Printf("%.9f\n", energy())
 
 }

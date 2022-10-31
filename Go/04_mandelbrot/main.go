@@ -24,10 +24,10 @@
 package main
 
 import (
-    "bufio"
+    // "bufio"
     "flag"
-    "fmt"
-    "os"
+    // "fmt"
+    // "os"
     "runtime"
     "strconv"
     "sync"
@@ -119,6 +119,8 @@ func main() {
     flag.Parse()
     if flag.NArg() > 0 {
         size, _ = strconv.Atoi(flag.Arg(0))
+    } else if flag.NArg() == 0{
+        size = 16000
     }
 
     bytesPerRow = size >> 3
@@ -148,11 +150,11 @@ func main() {
     /* wait for the file workers to finish, then write */
     wg.Wait()
 
-    out := bufio.NewWriter(os.Stdout)
-    defer out.Flush()
-    fmt.Fprintf(out, "P4\n%d %d\n", size, size)
+    // out := bufio.NewWriter(os.Stdout)
+    // defer out.Flush()
+    // fmt.Fprintf(out, "P4\n%d %d\n", size, size)
 
-    for y := 0; y < size; y++ {
-        out.Write(rows[y])
-    }
+    // for y := 0; y < size; y++ {
+        // out.Write(rows[y])
+    // }
 }

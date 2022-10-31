@@ -9,14 +9,19 @@ services:
     image: brauliobalanza/devcontainer:android.runner
     volumes:
       - .:/workspace:cached
+    command: /bin/zsh -c "while sleep 1000; do :; done"
+  rust:
+    image: brauliobalanza/devcontainer:rust.wasm
+    volumes:
+      - .:/workspace:cached
+    command: /bin/zsh -c "while sleep 1000; do :; done"
+  go:
+    image: brauliobalanza/devcontainer:go.wasm
+    volumes:
+      - .:/workspace:cached
+    command: /bin/zsh -c "while sleep 1000; do :; done" 
     ports:
       - "8000"
       - "2019"
       - "2028"
       - "80"
-    command: /bin/zsh -c "while sleep 1000; do :; done"
-  rust:
-    image: brauliobalanza/devcontainer:rust.wasu
-    volumes:
-      - .:/workspace:cached
-    command: /bin/zsh -c "while sleep 1000; do :; done"

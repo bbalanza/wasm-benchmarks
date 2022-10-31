@@ -1,128 +1,152 @@
+/* The Computer Language Benchmarks Game
+ * https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
+ *
+ * contributed by The Go Authors.
+ * Based on C program by Joern Inge Vestgaarden
+ * and Jorge Peixoto de Morais Neto.
+ * flag.Arg hack by Isaac Gouy
+ */
+
 package main
 
-/* The Computer Language Benchmarks Game
-   https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
-
-   Contributed by Dean Becker
-*/
-
 import (
-   "io/ioutil"
-   "os"
-   "fmt"
-   "regexp"
+   // "bufio"
+   "flag"
+   // "os"
+   "strconv"
 )
 
-// regex and replacement string
-type subst struct {
-   re                *regexp.Regexp
-   replacementString []byte
+// var out *bufio.Writer
+
+var n = 0
+
+const WIDTH = 60 // Fold lines after WIDTH bytes
+
+func min(a, b int) int {
+   if a < b {
+      return a
+   }
+   return b
 }
 
-// regex and result value
-type variant struct {
-   re     *regexp.Regexp
-   result int // for storing the result of the re
+type AminoAcid struct {
+   p float64
+   c byte
 }
 
-var (
-   variants      []*variant
-   substitutions []*subst
-   bytes         []byte
-   originalLen   int
-   cleanedLen    int
-   cleanRE       *subst
+func AccumulateProbabilities(genelist []AminoAcid) {
+   for i := 1; i < len(genelist); i++ {
+      genelist[i].p += genelist[i-1].p
+   }
+}
+
+// RepeatFasta prints the characters of the byte slice s. When it
+// reaches the end of the slice, it goes back to the beginning.
+// It stops after generating count characters.
+// After each WIDTH characters it prints a newline.
+// It assumes that WIDTH <= len(s) + 1.
+func RepeatFasta(s []byte, count int) {
+   pos := 0
+   s2 := make([]byte, len(s)+WIDTH)
+   copy(s2, s)
+   copy(s2[len(s):], s)
+   for count > 0 {
+      line := min(WIDTH, count)
+      // out.Write(s2[pos : pos+line])
+      // out.WriteByte('\n')
+      pos += line
+      if pos >= len(s) {
+         pos -= len(s)
+      }
+      count -= line
+   }
+}
+
+var lastrandom uint32 = 42
+
+const (
+   IM = 139968
+   IA = 3877
+   IC = 29573
 )
+
+// Each element of genelist is a struct with a character and
+// a floating point number p between 0 and 1.
+// RandomFasta generates a random float r and
+// finds the first element such that p >= r.
+// This is a weighted random selection.
+// RandomFasta then prints the character of the array element.
+// This sequence is repeated count times.
+// Between each WIDTH consecutive characters, the function prints a newline.
+func RandomFasta(genelist []AminoAcid, count int) {
+   buf := make([]byte, WIDTH+1)
+   for count > 0 {
+      line := min(WIDTH, count)
+      for pos := 0; pos < line; pos++ {
+         lastrandom = (lastrandom*IA + IC) % IM
+         // Integer to float conversions are faster if the integer is signed.
+         r := float64(int(lastrandom)) / IM
+         for _, v := range genelist {
+            if v.p >= r {
+               buf[pos] = v.c
+               break
+            }
+         }
+      }
+      buf[line] = '\n'
+      // out.Write(buf[0 : line+1])
+      count -= line
+   }
+}
 
 func main() {
+   // out = bufio.NewWriter(os.Stdout)
+   // defer out.Flush()
 
-   doneCh := make(chan int)
+   flag.Parse()
+   if flag.NArg() > 0 { n,_ = strconv.Atoi( flag.Arg(0) ) } else if flag.NArg() == 0 { n = 25000000 }
 
-   // initialize concurrently
-   go loadFile(doneCh)
-   go initRegexes(doneCh)
-
-   // wait for the above routines to finish
-   <-doneCh
-   <-doneCh
-
-   // clean the input
-   bytes = cleanRE.re.ReplaceAllLiteral(bytes, cleanRE.replacementString)
-   cleanedLen = len(bytes)
-
-   // since this one takes longest, start it first
-   finalLen := make(chan int)
-   go func() {
-      // copy our bytes so we don't trounce the variant routines
-      bb := make([]byte, len(bytes))
-      copy(bb, bytes)
-
-      for _, sub := range substitutions {
-         bb = sub.re.ReplaceAll(bb, sub.replacementString)
-      }
-
-      finalLen <- len(bb)
-   }()
-
-   // variant routines
-   for _, v := range variants {
-      go countVariants(doneCh, v)
+   iub := []AminoAcid{
+      AminoAcid{0.27, 'a'},
+      AminoAcid{0.12, 'c'},
+      AminoAcid{0.12, 'g'},
+      AminoAcid{0.27, 't'},
+      AminoAcid{0.02, 'B'},
+      AminoAcid{0.02, 'D'},
+      AminoAcid{0.02, 'H'},
+      AminoAcid{0.02, 'K'},
+      AminoAcid{0.02, 'M'},
+      AminoAcid{0.02, 'N'},
+      AminoAcid{0.02, 'R'},
+      AminoAcid{0.02, 'S'},
+      AminoAcid{0.02, 'V'},
+      AminoAcid{0.02, 'W'},
+      AminoAcid{0.02, 'Y'},
    }
 
-   // await all variant results (so we can see them in order)
-   for range variants {
-      <-doneCh
+   homosapiens := []AminoAcid{
+      AminoAcid{0.3029549426680, 'a'},
+      AminoAcid{0.1979883004921, 'c'},
+      AminoAcid{0.1975473066391, 'g'},
+      AminoAcid{0.3015094502008, 't'},
    }
 
-   // print all variant results
-   for _, v := range variants {
-      fmt.Printf("%s %d\n", v.re.String(), v.result)
-   }
+   AccumulateProbabilities(iub)
+   AccumulateProbabilities(homosapiens)
 
-   // print finalLen when it's available
-   fmt.Printf("\n%d\n%d\n%d\n", originalLen, cleanedLen, <-finalLen)
+   alu := []byte(
+      "GGCCGGGCGCGGTGGCTCACGCCTGTAATCCCAGCACTTTGG" +
+         "GAGGCCGAGGCGGGCGGATCACCTGAGGTCAGGAGTTCGAGA" +
+         "CCAGCCTGGCCAACATGGTGAAACCCCGTCTCTACTAAAAAT" +
+         "ACAAAAATTAGCCGGGCGTGGTGGCGCGCGCCTGTAATCCCA" +
+         "GCTACTCGGGAGGCTGAGGCAGGAGAATCGCTTGAACCCGGG" +
+         "AGGCGGAGGTTGCAGTGAGCCGAGATCGCGCCACTGCACTCC" +
+         "AGCCTGGGCGACAGAGCGAGACTCCGTCTCAAAAA")
 
-}
-
-func loadFile(doneCh chan int) {
-   var err error
-   bytes, err = ioutil.ReadAll(os.Stdin)
-   if err != nil {
-      fmt.Fprintf(os.Stderr, "can't read input: %s\n", err)
-      os.Exit(2)
-   }
-   originalLen = len(bytes)
-   doneCh <- 1
-}
-
-func countVariants(doneCh chan int, v *variant) {
-   v.result = len(v.re.FindAll(bytes, -1))
-   doneCh <- 1
-}
-
-func initRegexes(doneCh chan int) {
-
-   variants = []*variant{
-      {re: regexp.MustCompile("agggtaaa|tttaccct")},
-      {re: regexp.MustCompile("[cgt]gggtaaa|tttaccc[acg]")},
-      {re: regexp.MustCompile("a[act]ggtaaa|tttacc[agt]t")},
-      {re: regexp.MustCompile("ag[act]gtaaa|tttac[agt]ct")},
-      {re: regexp.MustCompile("agg[act]taaa|ttta[agt]cct")},
-      {re: regexp.MustCompile("aggg[acg]aaa|ttt[cgt]ccct")},
-      {re: regexp.MustCompile("agggt[cgt]aa|tt[acg]accct")},
-      {re: regexp.MustCompile("agggta[cgt]a|t[acg]taccct")},
-      {re: regexp.MustCompile("agggtaa[cgt]|[acg]ttaccct")},
-   }
-
-   substitutions = []*subst{
-      {regexp.MustCompile("tHa[Nt]"), []byte("<4>")},
-      {regexp.MustCompile("aND|caN|Ha[DS]|WaS"), []byte("<3>")},
-      {regexp.MustCompile("a[NSt]|BY"), []byte("<2>")},
-      {regexp.MustCompile("<[^>]*>"), []byte("|")},
-      {regexp.MustCompile("\\|[^|][^|]*\\|"), []byte("-")},
-   }
-
-   cleanRE = &subst{regexp.MustCompile("(>[^\n]+)?\n"), []byte("")}
-
-   doneCh <- 1
+   // out.WriteString(">ONE Homo sapiens alu\n")
+   RepeatFasta(alu, 2*n)
+   // out.WriteString(">TWO IUB ambiguity codes\n")
+   RandomFasta(iub, 3*n)
+   // out.WriteString(">THREE Homo sapiens frequency\n")
+   RandomFasta(homosapiens, 5*n)
 }
