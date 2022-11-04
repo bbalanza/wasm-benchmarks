@@ -5,7 +5,7 @@
 // Converted from C to Rust by Tung Duong
 
 use std::ops::{Add, Sub, Mul};
-use std::io::Write;
+// use std::io::Write;
 use rayon::prelude::*;
 use wasm_bindgen::prelude::*;
 pub use wasm_bindgen_rayon::init_thread_pool; 
@@ -131,7 +131,7 @@ pub fn mandelbrot(){
         .unwrap_or(16000);
     width = (width+7) & !7;
     
-    console_log!("P4\n{} {}", width, width);
+    // console_log!("P4\n{} {}", width, width);
     let mut r0 = vec![f64x2(0.0,0.0); width/2];
     let mut i0 = vec![0.0; width];
 
@@ -172,10 +172,10 @@ pub fn mandelbrot(){
     	}).collect()
     };
 
-    let stdout_unlocked = std::io::stdout();
-    let mut stdout = stdout_unlocked.lock();
-    for row in rows{
-    	stdout.write_all(&row).unwrap();
-    }
-    stdout.flush().unwrap();
+    // let stdout_unlocked = std::io::stdout();
+    // let mut stdout = stdout_unlocked.lock();
+    // for row in rows{
+    // 	stdout.write_all(&row).unwrap();
+    // }
+    // stdout.flush().unwrap();
 }

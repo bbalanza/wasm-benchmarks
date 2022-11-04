@@ -151,5 +151,5 @@ pub fn fannkuchredux() {
         .unwrap_or(12);
 
     let (checksum, maxflips) = fannkuch(n);
-    console_log!("{}\nPfannkuchen({}) = {}", checksum, n, maxflips);
+    // console_log!("{}\nPfannkuchen({}) = {}", checksum, n, maxflips);
 }

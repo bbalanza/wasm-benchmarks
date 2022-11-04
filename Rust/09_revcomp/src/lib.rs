@@ -321,7 +321,7 @@ async fn revcomp_run() -> io::Result<()> {
     // let mut stdout = unsafe { File::from_raw_fd(1) };
     // #[cfg(not(unix))]
 
-    let fasta = JsValue::as_string(&fetchAsset("https://localhost:2028/assets/fasta.txt").await).unwrap();
+    let fasta = JsValue::as_string(&fetchAsset("https://10.243.134.5:54265/assets/fasta.txt").await).unwrap();
     // #[cfg(not(unix))]
     // let stdin = stdin.lock();
     // #[cfg(not(unix))]
@@ -332,7 +332,7 @@ async fn revcomp_run() -> io::Result<()> {
     while let Some(seq) = reader.next() {
         let mut seq = seq?;
         seq.reverse_complement();
-        console_log!("{}", &std::str::from_utf8(seq.as_slice()).unwrap());
+        // console_log!("{}", &std::str::from_utf8(seq.as_slice()).unwrap());
     }
 
     Ok(())

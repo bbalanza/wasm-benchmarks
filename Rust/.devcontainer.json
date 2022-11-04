@@ -3,5 +3,5 @@
   "dockerComposeFile": ["../docker-compose.yml"],
   "service": "rust",
   "shutdownAction": "none",
-  "workspaceFolder": "/workspace/Rust"
+  "workspaceFolder": "/workspace/"
 }

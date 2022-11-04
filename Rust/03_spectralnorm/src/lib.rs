@@ -62,7 +62,7 @@ pub fn spectralnorm() {
         .and_then(|n| n.parse().ok())
         .unwrap_or(5500);
     let answer = run(n);
-    console_log!("{:.9}", answer);
+    // console_log!("{:.9}", answer);
 }
 
 fn run(n: usize) -> f64 {

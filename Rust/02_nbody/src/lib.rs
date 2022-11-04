@@ -237,5 +237,5 @@ macro_rules! console_log {
 pub fn nbody() {
     let n: usize = std::env::args().nth(1).and_then(|s| s.parse().ok()).unwrap_or(50000000);
     let (energy_before, energy_after) = run(n);
-    console_log!("{:.9}\n{:.9}", energy_before, energy_after);
+    // console_log!("{:.9}\n{:.9}", energy_before, energy_after);
 }
