@@ -38,7 +38,7 @@ var complement = [256]uint8{
 func main() {
 
 	// TODO: change url to server domain
-	resp, err := http.Get("https://10.243.134.5:57949/assets/fasta.txt")
+	resp, err := http.Get("https://10.243.134.5:54265/assets/fasta.txt")
 	if err != nil {
 		fmt.Println(err)
 		return
