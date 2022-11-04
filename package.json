@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "scripts": {
+    "ar": "python3 android-runner",
+    "run:helloworld": "npm run ar ./wasm-experiments/00_helloworld.json",
+    "run:fannkuchredux": "npm run ar ./wasm-experiments/01_fannkuchredux.json",
+    "run:nbody": "npm run ar ./wasm-experiments/02_nbody.json",
+    "run:spectralnorm": "npm run ar ./wasm-experiments/03_spectralnorm.json",
+    "run:mandelbrot": "npm run ar ./wasm-experiments/04_mandelbrot.json",
+    "run:fasta": "npm run ar ./wasm-experiments/07_fasta.json",
+    "run:revcomp": "npm run ar ./wasm-experiments/09_revcomp.json",
+    "run:all" : "run-s run:helloworld run:fannkuchredux run:nbody run:spectralnorm run:mandelbrot run:revcomp"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5"
+  }
+}
